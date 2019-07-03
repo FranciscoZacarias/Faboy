@@ -1,0 +1,22 @@
+{
+  "name": "faboy",
+  "version": "1.0.0",
+  "description": "Discord Bot",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FranciscoZacarias/Faboy.git"
+  },
+  "keywords": [
+    "fabot"
+  ],
+  "author": "Francisco Zacarias",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FranciscoZacarias/Faboy/issues"
+  },
+  "homepage": "https://github.com/FranciscoZacarias/Faboy#readme"
+}
