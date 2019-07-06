@@ -4,7 +4,8 @@
   "description": "Discord Bot",
   "main": "server.js",
   "scripts": {
-    "test": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,13 @@
   "bugs": {
     "url": "https://github.com/FranciscoZacarias/Faboy/issues"
   },
-  "homepage": "https://github.com/FranciscoZacarias/Faboy#readme"
+  "homepage": "https://github.com/FranciscoZacarias/Faboy#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.0.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.6.3",
+    "node-fetch": "^2.6.0"
+  }
 }
