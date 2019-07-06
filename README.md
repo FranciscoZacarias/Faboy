@@ -1,6 +1,6 @@
 # Faboy
 
-My perfect mix between learning fun stuff and meme along the way!  
+Faboy is a discord bot made for learning purposes. 
 
 # Features!
 
