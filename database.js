@@ -1,9 +1,14 @@
 require('dotenv').config();
 const logger = require('./utils/Logger');
 const mongoose = require('mongoose');
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@faboy-7astz.azure.mongodb.net/${process.env.DB}?retryWrites=true&w=majority`;
 
-mongoose.connect(uri,{ useNewUrlParser: true });
+mongoose.connect(process.env.DB,{ useNewUrlParser: true }, (err) => 
+{
+	if(err)
+	{
+		logger.log(`Error connecting to DB:\n${err}`, error);
+	}
+});
 mongoose.connection.on('connected', () => 
 {
     logger.log('Connected to database', 'ready');

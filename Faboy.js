@@ -64,7 +64,7 @@ module.exports = class Faboy extends Client
                     this.initializeEvents(file_path);
                 }
             } 
-           catch(error)
+            catch(error)
             {
                 this.logger.log(error, 'error');
             }

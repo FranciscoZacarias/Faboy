@@ -6,6 +6,7 @@ module.exports = async function(message)
     try
     {
         const command_run = this.commands.find(c => c.name === msg.command || c.aliases.includes(msg.command));
+        if(!command_run) return;
         command_run.process(msg);
     }
     catch(error)
