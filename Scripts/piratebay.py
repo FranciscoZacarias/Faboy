@@ -6,7 +6,7 @@ try:
 except:
 	keyword = "garfield"
 
-domain = 'https://pirateproxy.bet'
+domain = 'https://pirateproxy.bet' 
 url = domain + '/search/' + keyword.replace(' ', '%20') + '/0/99/0'
 
 source = requests.get(url).text
