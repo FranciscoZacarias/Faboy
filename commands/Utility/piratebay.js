@@ -34,7 +34,7 @@ module.exports = class extends Command
                 .setFooter(`${obj.By} | ${obj.Uploaded}`)
                 //(parsed_message.args.includes('-m')) ? (pirate_embed.addField(`Magnet: `,`${obj.Magnet}`)) : ""   
             
-            parsed_message.message.channel.send(embed);
+            return parsed_message.message.channel.send(embed);
         });
         script.stderr.on('data', (err) =>
         {
