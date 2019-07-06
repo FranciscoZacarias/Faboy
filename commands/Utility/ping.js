@@ -9,7 +9,6 @@ module.exports = class extends Command
 
     async run(parsed_message)
     {
-        console.log('here')
         parsed_message.message.channel.send('pong!');
     }
 
