@@ -5,13 +5,13 @@ try:
 	keyword = sys.argv[1]
 except:
 	keyword = "garfield"
-	
-url = 'https://pirateproxy.bet/search/' + keyword.replace(' ', '%20') + '/0/99/0'
+
+domain = 'https://pirateproxy.bet'
+url = domain + '/search/' + keyword.replace(' ', '%20') + '/0/99/0'
 
 source = requests.get(url).text
 soup = BeautifulSoup(source, 'lxml')
-div = soup.body.find('div', {"id": "SearchResults"})\
-				.find('div', {"id": "main-content"})
+div = soup.body.find('div', {"id": "SearchResults"}).find('div', {"id": "main-content"})
 table = div.find('table', {"id": "searchResult"})
 
 i = 0
