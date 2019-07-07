@@ -9,14 +9,22 @@ except:
 domain = 'https://pirateproxy.bet' 
 url = domain + '/search/' + keyword.replace(' ', '%20') + '/0/99/0'
 
-source = requests.get(url).text
-soup = BeautifulSoup(source, 'lxml')
-div = soup.body.find('div', {"id": "SearchResults"}).find('div', {"id": "main-content"})
-table = div.find('table', {"id": "searchResult"})
+try:
+	source = requests.get(url).text
+	soup = BeautifulSoup(source, 'lxml')
+	div = soup.body.find('div', {"id": "SearchResults"}).find('div', {"id": "main-content"})
+	table = div.find('table', {"id": "searchResult"})
+except:
+	sys.exit(0)
 
 i = 0
 category, plataform, seeders, leechers, name, url, magnet, title, uploaded, size, by =\
 [], [], [], [], [], [], [], [], [], [], []
+
+try:
+	table.find_all('tr')
+except:
+	sys.exit(0)
 
 for torrent in table.find_all('tr'):
 	if i == 0:

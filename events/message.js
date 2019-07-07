@@ -18,7 +18,7 @@ module.exports = async function(message)
 /**
  * DICT KEYS
  * 
- * content,
+ * content
  * perfix
  * command
  * args

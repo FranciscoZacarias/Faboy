@@ -21,9 +21,16 @@ module.exports = class extends Command
         script.stdout.on('end', () => 
         {
             let output_buf = Buffer.concat(chunks)
-            let obj = (JSON.parse(output_buf.toString()))[0];
-
-            console.log(parsed_message)
+            
+            let obj;
+            try
+            {
+                obj = (JSON.parse(output_buf.toString()))[0];
+            }
+            catch(err) 
+            {
+                return parsed_message.message.channel.send("Can't find that torrent");
+            }
 
             const desc_string = `Category: ${obj.Category} | Plataform: ${obj.Plataform} \nSeeders: ${obj.Seeders} | Leechers: ${obj.Leechers} \nSize: ${obj.Size} | Author Title: ${obj.Title}`
             const embed = new this.client.Discord.RichEmbed()
