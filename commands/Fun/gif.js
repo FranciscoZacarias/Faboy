@@ -13,7 +13,10 @@ module.exports = class extends Command
         return this.client.fetch(url)
         .then((response) => 
         {
-            if(response.status != 200) callback(response.status, null);
+            if(response.status != 200)
+            {
+                this.logger.log(response.status, 'error');
+            }
             response.json()
             .then((data) =>
             {

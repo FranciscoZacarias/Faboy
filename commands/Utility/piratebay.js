@@ -21,7 +21,6 @@ module.exports = class extends Command
         script.stdout.on('end', () => 
         {
             let output_buf = Buffer.concat(chunks)
-            
             let obj;
             try
             {
