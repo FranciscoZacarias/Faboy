@@ -13,10 +13,6 @@ module.exports = class extends Command
         return this.client.fetch(url)
         .then((response) => 
         {
-            if(response.status != 200)
-            {
-                this.logger.log(response.status, 'error');
-            }
             response.json()
             .then((data) =>
             {
@@ -29,7 +25,7 @@ module.exports = class extends Command
                 {
                     resposne = "Gif Not Found!";
                 }
-                return parsed_message.message.channel.send(response);
+                parsed_message.message.channel.send(response);
             })
         });
     }

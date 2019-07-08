@@ -2,6 +2,7 @@ module.exports = async function(message)
 {
     const msg = message_parser(message);
     if(msg.perfix != process.env.BOT_PERFIX) return;
+    this.logger.log(`[${msg.discord_alias} in ${msg.guild_name}: ${msg.message.content}]`,'log');
     
     try
     {
