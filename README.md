@@ -26,11 +26,10 @@ BOT_TOKEN=
 BOT_ID=
 BOT_PERFIX=
 BOT_DEV=
-
-DB=
-
+DB= (mongoose database connection string)
 CAT_API_KEY=
 TENOR_API_KEY=
 EDAMAM_ID=
 EDAMAM_KEY=	
+IMGFLIP_PW=
 ```
