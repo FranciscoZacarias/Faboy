@@ -8,7 +8,7 @@ Faboy is a discord bot made for learning purposes.
 
 # Objective
   
-  - Learn Javascript, Mongoose, Node.js, Acessing 3rd Party APIs
+  - Learn Node.js, MongoDB, Acessing 3rd Party APIs
   - Having fun
 
 # How to Use
