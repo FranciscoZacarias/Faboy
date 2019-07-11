@@ -3,7 +3,7 @@ import sys, json, base64
 from io import BytesIO
 
 try:
-	keyword = sys.argv[1]
+	keyword = sys.argv[1].upper()
 except:
 	keyword = "dumbfuck"
 
