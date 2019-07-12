@@ -7,10 +7,16 @@ try:
 except:
 	keyword = "dumbfuck"
 
-image = Image.open('/Users/frank/Desktop/Work/Projetos_/Faboy/assets/100meme.png')
-font = ImageFont.truetype("impact.ttf", 60)
+
+image = Image.open('./assets/100meme.png')
+font = ImageFont.truetype("impact.ttf", 70)
 draw = ImageDraw.Draw(image)
-draw.text(xy=(10,85), text=keyword, fill=(0,0,0), font=font)
+
+strip_width, strip_height = image.size
+text_width, text_height = draw.textsize(keyword, font)
+position = ((strip_width-text_width)/4,(strip_height-text_height)/2)
+
+draw.text(xy=position, text=keyword, font=font)
 
 buffered = BytesIO()
 image.save(buffered, format="PNG")
