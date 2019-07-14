@@ -48,31 +48,10 @@ module.exports = class extends Command
                 }
                 return parsed_message.message.channel.send(uri);
             });
-            
         });
         script.stderr.on('data', (err) =>
         {
             this.client.logger.log(err, 'error');
         });
-        /*
-        const uri = `https://api.imgflip.com/caption_image?template_id=167991076&username=fzac&password=${process.env.IMGFLIP_PW}&text0=${parsed_message.clean_message}&max_font_size=60&outline_color=#000000`;
-        return this.client.fetch(uri,{
-            method: 'POST',
-            header: {
-            },
-            body: {
-            }
-        })
-        .then((response) =>
-        {
-            response.json()
-            .then((data) =>
-            {
-                console.log(data);
-                if(data.success != true) return;
-                parsed_message.message.channel.send(data.data.url);
-            });
-        });
-        */
     }
 }
