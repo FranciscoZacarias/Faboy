@@ -14,8 +14,9 @@ Faboy is a discord bot made for learning purposes.
 # How to Use
 
   - Make sure you have [Node.js](https://nodejs.org/en/) installed.
-  - Inside the desired directory run `npm install` to install dependencies.
-  - Some modules require *Python* and *BeautifulSoup* library. Feel free to skip this if you don't want those features.
+  - Run `npm install` to install dependencies.
+  - Set up your .env file with the enviroment variables. 
+  - Some modules require [Python 3](https://www.python.org/downloads/) and some other dependencies. The script folder contains all python scripts used, but none are essential to run the bot. Feel free to not use if you so desire.
   - Run `npm run dev`.
   - Keep in mind **I have no idea what's happening** so good luck.
 
@@ -31,5 +32,4 @@ CAT_API_KEY=
 TENOR_API_KEY=
 EDAMAM_ID=
 EDAMAM_KEY=	
-IMGFLIP_PW=
 ```
