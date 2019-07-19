@@ -11,33 +11,18 @@ module.exports = class extends Command
     async run(parsed_message)
     {
         const api_key = '?api_key=' + process.env.RIOT_API_KEY;
-        const summoner = await this.get_data(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`, this.client)
-        const matches  = (await this.get_data(`https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/${summoner.accountId}/${api_key}`, this.client)).matches
-        console.log(matches)
-        /*
-        const summoner = await this.client.fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`)
-        .then(async (response) =>
-        {
-            return response.json();
-        });
-        const matches = await this.client.fetch(`https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/${summoner.accountId}/${api_key}`)
-        .then(async (response) =>
-        {
-            return response.json();
-        });
-        const last_match = await this.client.fetch(`https://euw1.api.riotgames.com/lol/match/v4/matches/${matches.matches[0].gameId}/${api_key}`)
-        .then(async (response) => 
-        {
-            return response.json();
-        });
-        const match_players = last_match.participantIdentities;
-        console.log(match_players);
-        */
+        const region = (parsed_message.args.length != 0) ? parsed_message.args[0].substring(1) : 'euw1';
+        const url = `https://${region}.api.riotgames.com`;
+
+        const summoner = await this.get_data(`${url}/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`)
+        const current_match  = await this.get_data(`${url}/lol/spectator/v4/active-games/by-summoner/${summoner.id}/${api_key}`)
+        console.log(current_match)
+
     }
 
-    async get_data(uri, context)
+    async get_data(uri)
     {
-        const response = await context.fetch(uri);
+        const response = await this.client.fetch(uri);
         const data = await response.json();
         return data;
     }
