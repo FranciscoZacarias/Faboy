@@ -11,8 +11,9 @@ module.exports = class extends Command
     async run(parsed_message)
     {
         const api_key = '?api_key=' + process.env.RIOT_API_KEY;
-        const summoner = await fetch_api(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`, this.client)
-        console.log(summoner)
+        const summoner = await this.get_data(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`, this.client)
+        const matches  = (await this.get_data(`https://euw1.api.riotgames.com/lol/match/v4/matchlists/by-account/${summoner.accountId}/${api_key}`, this.client)).matches
+        console.log(matches)
         /*
         const summoner = await this.client.fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`)
         .then(async (response) =>
@@ -29,16 +30,15 @@ module.exports = class extends Command
         {
             return response.json();
         });
-        console.log(last_match)
+        const match_players = last_match.participantIdentities;
+        console.log(match_players);
         */
     }
-}
 
-function fetch_api(uri, context)
-{
-    context.fetch(uri)
-    .then(async (response) =>
+    async get_data(uri, context)
     {
-        return response.json();
-    })
+        const response = await context.fetch(uri);
+        const data = await response.json();
+        return data;
+    }
 }
