@@ -22,15 +22,13 @@ module.exports = class extends Command
             return parsed_message.message.channel.send('Summoner not found or not in match');
         }
         const players = current_match.participants
-        
-        console.log(players)
-
         let field = ["",""];
         let index = 0;
         for(let i = 0; i < players.length; i++)
         {
             const player = players[i];
             const player_league = await (this.get_data(`${url}/lol/league/v4/entries/by-summoner/${player.summonerId}/${api_key}`));
+            console.log(player_league)
             let this_champ = "";
             let rank = "";
             champions.forEach(champion => 
@@ -44,7 +42,7 @@ module.exports = class extends Command
             if(!player_league[0])
                 rank = `UNRANKED\n`;
             else
-                rank = `${player_league[0].tier} ${player_league[0].rank}\n--LP: ${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
+                rank = `${player_league[player_league.length-1].tier} ${player_league[player_league.length-1].rank}\n--LP: ${player_league[player_league.length-1].leaguePoints} (W:${player_league[player_league.length-1].wins} L:${player_league[player_league.length-1].losses})\n`;
             field[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank: ${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
