@@ -23,31 +23,25 @@ module.exports = class extends Command
         console.log(current_match)
         const players = current_match.participants
 
-        let field1 = "";
-        let field2 = "";
+        let field = ["",""];
+        let index = 0;
         for(let i = 0; i < players.length; i++)
         {
             const player = players[i];
             const player_league = await (this.get_data(`${url}/lol/league/v4/entries/by-summoner/${player.summonerId}/${api_key}`));
-            if(i < 5)
+            if(i > 4)
             {
-                if(!player_league[0]) 
-                    field1 += await `Summoner Name: ${player.summonerName}\n--Rank: Unranked\n`;
-                else
-                    field1 += await `Summoner Name: ${player.summonerName}\n--Rank: ${player_league[0].tier} ${player_league[0].rank}\n--LP:${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
+                index = 1;
             }
+            if(!player_league[0])
+                field[index] += await `Summoner Name: ${player.summonerName}\n--Rank: Unranked\n`;
             else
-            {
-                if(!player_league[0])
-                    field2 += await `Summoner Name: ${player.summonerName}\n--Rank: Unranked\n`;
-                else
-                    field2 += await `Summoner Name: ${player.summonerName}\n--Rank: ${player_league[0].tier} ${player_league[0].rank}\n--LP:${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
-            }
+                field[index] += await `${player.summonerName}:\n--Rank: ${player_league[0].tier} ${player_league[0].rank}\n--LP:${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
-            .addField("TEAM 1", field1)
-            .addField("TEAM 2", field2)
+            .addField("TEAM 1", field[0])
+            .addField("TEAM 2", field[1])
             .setColor("#ffffcc")
             .setThumbnail('https://nse.gg/media/1990/lol_client_logo.png?anchor=center&mode=crop&width=300&height=300')
 
