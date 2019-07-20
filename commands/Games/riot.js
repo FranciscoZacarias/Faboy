@@ -1,4 +1,5 @@
 const Command = require('../../utils/Command');
+const champions = require('lol-champions');
 
 module.exports = class extends Command
 {
@@ -20,8 +21,9 @@ module.exports = class extends Command
         {
             return parsed_message.message.channel.send('Summoner not found or not in match');
         }
-        console.log(current_match)
         const players = current_match.participants
+        
+        console.log(players)
 
         let field = ["",""];
         let index = 0;
@@ -29,20 +31,27 @@ module.exports = class extends Command
         {
             const player = players[i];
             const player_league = await (this.get_data(`${url}/lol/league/v4/entries/by-summoner/${player.summonerId}/${api_key}`));
-            if(i > 4)
+            let this_champ = "";
+            let rank = "";
+            champions.forEach(champion => 
             {
-                index = 1;
-            }
+                if(player.championId == champion.key)
+                {
+                    this_champ = (champion.id).toUpperCase();
+                }
+            });
+            if(i > 4) index = 1;
             if(!player_league[0])
-                field[index] += await `Summoner Name: ${player.summonerName}\n--Rank: Unranked\n`;
+                rank = `UNRANKED\n`;
             else
-                field[index] += await `${player.summonerName}:\n--Rank: ${player_league[0].tier} ${player_league[0].rank}\n--LP:${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
+                rank = `${player_league[0].tier} ${player_league[0].rank}\n--LP: ${player_league[0].leaguePoints} (W:${player_league[0].wins} L:${player_league[0].losses})\n`;
+            field[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank: ${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
-            .addField("TEAM 1", field[0])
-            .addField("TEAM 2", field[1])
-            .setColor("#ffffcc")
+            .addField("#####TEAM 1#####", field[0])
+            .addField("#####TEAM 2#####", field[1])
+            .setColor("#00BFFF")
             .setThumbnail('https://nse.gg/media/1990/lol_client_logo.png?anchor=center&mode=crop&width=300&height=300')
 
         return parsed_message.message.channel.send(embed);
