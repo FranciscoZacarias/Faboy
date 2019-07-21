@@ -55,7 +55,7 @@ module.exports = class extends Command
         let index = 0;
         let half_players = 4;
         
-        if(current_match.mapId == 10) //if map is twited treeline
+        if(current_match.mapId == 10) //if map is twisted treeline
             half_players = 2;
         
         for(let i = 0; i < players.length; i++)
@@ -63,8 +63,17 @@ module.exports = class extends Command
             const player = players[i];
             const player_league = await (this.get_data(`${url}/lol/league/v4/entries/by-summoner/${player.summonerId}/${api_key}`));
             let this_champ = "";
+            let this_league = "";
             let rank = "";
-            
+
+            //i dont know any better sry
+            player_league.forEach(league => 
+            {
+                if(league.queueType == 'RANKED_SOLO_5x5')
+                {
+                    this_league = league;
+                }    
+            });
             champions.forEach(champion => 
             {
                 if(player.championId == champion.key)
@@ -77,9 +86,9 @@ module.exports = class extends Command
             if(!player_league[0])
                 rank = `UNRANKED\n`;
             else
-                rank = `${player_league[player_league.length-1].tier} ${player_league[player_league.length-1].rank}\n--LP: ${player_league[player_league.length-1].leaguePoints} (W:${player_league[player_league.length-1].wins} L:${player_league[player_league.length-1].losses})\n`;
+                rank = `${this_league.tier} ${this_league.rank}\n--LP: ${this_league.leaguePoints} (W:${this_league.wins} L:${this_league.losses})\n`;
                 
-            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank: ${rank}`;
+            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank (SoloQ): ${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
