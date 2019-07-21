@@ -11,14 +11,7 @@ module.exports = class extends Command
 
     async run(parsed_message)
     {
-        if(parsed_message.args.includes('-champ'))
-        {
-            return this.get_champion(parsed_message);    
-        }
-        else
-        {
-            return this.get_match(parsed_message);
-        }
+        return (parsed_message.args.includes('-champ')) ? this.get_champion(parsed_message) : this.get_match(parsed_message);
     }
 
     async get_champion(parsed_message)
@@ -35,7 +28,6 @@ module.exports = class extends Command
         {
             return parsed_message.message.channel.send('Cannot find that champion!');
         }
-        console.log(champ)
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("Champion: " + `**__${(champ.id).toUpperCase()}__**`)
             .setDescription(champ.title)
@@ -52,18 +44,18 @@ module.exports = class extends Command
         const url = `https://${region}.api.riotgames.com`;
         const summoner = await this.get_data(`${url}/lol/summoner/v4/summoners/by-name/${parsed_message.clean_message}/${api_key}`)
         const current_match  = await this.get_data(`${url}/lol/spectator/v4/active-games/by-summoner/${summoner.id}/${api_key}`)
-        
+
         if(current_match.status)
         {
             return parsed_message.message.channel.send('Summoner not found or not in match');
         }
 
         const players = current_match.participants
-        let field = ["",""];
+        let teams = ["",""]; //two teams
         let index = 0;
         let half_players = 4;
         
-        if(current_match.mapId == 10)
+        if(current_match.mapId == 10) //if map is twited treeline
             half_players = 2;
         
         for(let i = 0; i < players.length; i++)
@@ -81,18 +73,18 @@ module.exports = class extends Command
                 }
             });
 
-            if(i > half_players) index = 1;
+            if(i > half_players) index = 1; //split player in 2 teams in discord embed
             if(!player_league[0])
                 rank = `UNRANKED\n`;
             else
                 rank = `${player_league[player_league.length-1].tier} ${player_league[player_league.length-1].rank}\n--LP: ${player_league[player_league.length-1].leaguePoints} (W:${player_league[player_league.length-1].wins} L:${player_league[player_league.length-1].losses})\n`;
                 
-            field[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank: ${rank}`;
+            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank: ${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
-            .addField("#####TEAM 1#####", field[0])
-            .addField("#####TEAM 2#####", field[1])
+            .addField("#####TEAM 1#####", teams[0])
+            .addField("#####TEAM 2#####", teams[1])
             .setColor("#00BFFF")
             .setThumbnail('https://nse.gg/media/1990/lol_client_logo.png?anchor=center&mode=crop&width=300&height=300')
 
@@ -104,5 +96,5 @@ module.exports = class extends Command
         const response = await this.client.fetch(uri);
         const data = await response.json();
         return data;
-    }
+    } 
 }
