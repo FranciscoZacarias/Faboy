@@ -62,33 +62,35 @@ module.exports = class extends Command
         {
             const player = players[i];
             const player_league = await (this.get_data(`${url}/lol/league/v4/entries/by-summoner/${player.summonerId}/${api_key}`));
-            let this_champ = "";
-            let this_league = "";
-            let rank = "";
+            
+            let this_league = {}; //dict with ranks and lp
+            for(let i = 0; i < player_league.length; i++)
+            {
+                this_league[player_league[i].queueType] = `${player_league[i].tier} ${player_league[i].rank}`;
+                this_league['LP'] = `${player_league[i].leaguePoints} (W:${player_league[i].wins} L:${player_league[i].losses})`;
+            }
 
-            //i dont know any better sry
-            player_league.forEach(league => 
+            let this_champ = "";
+            for(let i = 0; i < champions.length; i++)
             {
-                if(league.queueType == 'RANKED_SOLO_5x5')
+                if(player.championId == champions[i].key)
                 {
-                    this_league = league;
-                }    
-            });
-            champions.forEach(champion => 
-            {
-                if(player.championId == champion.key)
-                {
-                    this_champ = (champion.id).toUpperCase();
+                    this_champ = (champions[i].id).toUpperCase();
                 }
-            });
+            }
 
             if(i > half_players) index = 1; //split player in 2 teams in discord embed
+            let rank = "";
             if(!player_league[0])
+            {
                 rank = `UNRANKED\n`;
+            }
             else
-                rank = `${this_league.tier} ${this_league.rank}\n--LP: ${this_league.leaguePoints} (W:${this_league.wins} L:${this_league.losses})\n`;
-                
-            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--Rank (SoloQ): ${rank}`;
+            {
+                let current_rank = (this_league['RANKED_SOLO_5x5']) ? `Rank(SoloQ) ${this_league['RANKED_SOLO_5x5']}` : `Rank(${Object.keys(this_league)[0]}) ${Object.values(this_league)[0]}`;
+                rank = `${current_rank}\n--LP: ${this_league['LP']}\n`;
+            }   
+            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
