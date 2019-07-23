@@ -52,11 +52,8 @@ module.exports = class extends Command
 
         const players = current_match.participants
         let teams = ["",""]; //two teams
-        let index = 0;
-        let half_players = 4;
-        
-        if(current_match.mapId == 10) //if map is twisted treeline
-            half_players = 2;
+        let index = 0; //index of each team
+        let half_players = (players.length / 2); //split the two teams 
         
         for(let i = 0; i < players.length; i++)
         {
@@ -76,10 +73,11 @@ module.exports = class extends Command
                 if(player.championId == champions[i].key)
                 {
                     this_champ = (champions[i].id).toUpperCase();
+                    break;
                 }
             }
 
-            if(i > half_players) index = 1; //split player in 2 teams in discord embed
+            if(i >= half_players) index = 1; //split player in 2 teams in discord embed
             let rank = "";
             if(!player_league[0])
             {
