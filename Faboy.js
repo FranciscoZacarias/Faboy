@@ -8,6 +8,7 @@ module.exports = class Faboy extends Client
         super (options)
         this.fs = require('fs');
         this.logger = require('./utils/Logger');
+        this.chalk = require('chalk');
         this.commands = new Collection();
         this.Discord = require('discord.js');
         this.fetch = require('node-fetch');
