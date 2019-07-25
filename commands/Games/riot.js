@@ -6,12 +6,25 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
-        this.aliases = ['lol', 'league', 'leagueoflegends', 'league-of-legends']
+        this.aliases = ['lol', 'league', 'leagueoflegends', 'league-of-legends'];
+        this.champ_aliases  = ['champ', 'champion', 'hero', 'character', 'char'];
+        this.region_aliases = ['region', 'regions', 'server', 'local']
+        this.region_code = ['ru', 'kr', 'br1', 'oc1', 'jp1', 'na1', 'eun1', 'euw1', 'tr1', 'la1', 'la2'];
     }
 
     async run(parsed_message)
     {
+        //these are for future features
+        const args = parsed_message.args;
+        const props = Object.getOwnPropertyNames(this).slice(3);
+
+        //this is garbage solution 
         return (parsed_message.args.includes('-champ')) ? this.get_champion(parsed_message) : this.get_match(parsed_message);
+    }
+
+    async get_regions(parsed_message)
+    {
+        parsed_message.message.channel.send(this.regions);
     }
 
     async get_champion(parsed_message)
@@ -47,12 +60,12 @@ module.exports = class extends Command
 
         if(current_match.status)
         {
-            return parsed_message.message.channel.send('Summoner not found or not in match');
+            return parsed_message.message.channel.send('Summoner not found, not in match or not in euw.');
         }
 
         const players = current_match.participants
         let teams = ["",""]; //two teams
-        let index = 0; //index of each team
+        let index = 0;       //index of each team
         let half_players = (players.length / 2); //split the two teams 
         
         for(let i = 0; i < players.length; i++)
@@ -88,7 +101,8 @@ module.exports = class extends Command
                 let current_rank = (this_league['RANKED_SOLO_5x5']) ? `Rank(SoloQ) ${this_league['RANKED_SOLO_5x5']}` : `Rank(${Object.keys(this_league)[0]}) ${Object.values(this_league)[0]}`;
                 rank = `${current_rank}\n--LP: ${this_league['LP']}\n`;
             }   
-            teams[index] += await `**__${this_champ}__** - ${player.summonerName}\n--${rank}`;
+            let sumName = (player.summonerName == parsed_message.clean_message) ? (`**__${player.summonerName}__** ««««««««««««««`) : player.summonerName;
+            teams[index] += await `**__${this_champ}__** - ${sumName}\n--${rank}`;
         }
         const embed = new this.client.Discord.RichEmbed()
             .setTitle("LEAGUE OF LEGENDS:")
@@ -107,3 +121,4 @@ module.exports = class extends Command
         return data;
     } 
 }
+
