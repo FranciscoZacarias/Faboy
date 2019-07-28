@@ -17,6 +17,11 @@ module.exports = class extends Command
         //these are for future features
         const args = parsed_message.args;
         const props = Object.getOwnPropertyNames(this).slice(3);
+        
+        //for a less garbage future
+        let my_arr = [];
+        let proto = Object.getPrototypeOf(this);
+        let methods = Object.getOwnPropertyNames(proto); 
 
         //this is garbage solution 
         return (parsed_message.args.includes('-champ')) ? this.get_champion(parsed_message) : this.get_match(parsed_message);
