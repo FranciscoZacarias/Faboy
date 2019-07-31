@@ -13,6 +13,7 @@ module.exports = class Faboy extends Client
         this.Discord = require('discord.js');
         this.fetch = require('node-fetch');
         this.moment = require('moment');
+        this.ffmpeg = require('ffmpeg');
         this.database = require('./database.js');
         this.regionsLang = {
             'Portugal': 'pt-PT',

@@ -34,7 +34,8 @@ module.exports = class extends Command
             .then(text =>
             {
                 let html = JSON.stringify(text)
-                let first_char = html.indexOf('<img src=\\') + 11;
+                let tag = '<img src=\\';
+                let first_char = html.indexOf(tag) + tag.length + 1;
                 let uri = '';
                 let req = false;
                 while(!req)

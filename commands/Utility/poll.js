@@ -9,7 +9,7 @@ module.exports = class extends Command
 
     async run(parsed_message)
     {
-        const react_array = ["🇦","🇧","🇨","🇩","🇪","🇫","🇬","🇭"];
+        const react_array = ["🇦","🇧","🇨","🇩","🇪","🇫","🇬","🇭","🇮","🇯","🇰","🇲","🇳","🇴","🇵","🇶","🇷","🇸","🇹","🇺","🇻","🇼","🇽","🇾","🇿"];
         const options = parsed_message.clean_message.split(',');
         
         let pool_embed = new this.client.Discord.RichEmbed()
@@ -18,11 +18,12 @@ module.exports = class extends Command
 
         options.forEach((option,index) => 
         {
-            if(index <= 7)
+            if(index <= react_array.length)
             {
                 option.trim();
                 if(!option) return;
-                pool_embed.addField(react_array[index] + " - " +options[index], '~~~~~');
+                let str = `${react_array[index]} - ${options[index]}`;
+                pool_embed.addField('------', str);
             }
         });
 
