@@ -6,35 +6,29 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.aliases = ['join', 'youtube']
     }
 
     async run(parsed_message)
     {
         let message = parsed_message.message; 
-        if(message.member.voiceChannel)
+        if(message.member.voiceChannel && !message.guild.voiceConnection)
         {
-            if(!message.guild.voiceConnection)
+            message.member.voiceChannel.join()
+            .then(connection => 
             {
-                const streamOptions = {seek: 0, volume: 1};
-                message.member.voiceChannel.join()
-                .then(connection => 
-                {
-                    const stream = ytdl('https://www.youtube.com/watch?v=U06jlgpMtQs', {filter: 'audioonly' });
-                    const dispatcher = connection.playStream(stream, streamOptions);
-                })
-                .catch(err =>
-                {
-                    this.client.logger.log(err, 'error');
-                })
-            }
-            else
+                console.log(parsed_message.clean_message);
+                const stream = ytdl('https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=4s', {filter: 'audioonly' });
+                const dispatcher = connection.playStream(stream, { seek: 0, volume: 1 });
+            })
+            .catch(err =>
             {
-                message.channel.send('u dumb'); 
-            }
+                this.client.logger.log(err, 'error');
+            })
         }
         else
         {
-            message.channel.send('where');
+            message.channel.send('u dumb'); 
         }
     }
 }
