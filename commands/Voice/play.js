@@ -18,7 +18,7 @@ module.exports = class extends Command
             .then(connection => 
             {
                 console.log(parsed_message.clean_message);
-                const stream = ytdl('https://www.youtube.com/watch?v=wZZ7oFKsKzY&t=4s', {filter: 'audioonly' });
+                const stream = ytdl('https://www.youtube.com/watch?v=3M_5oYU-IsU', {filter: 'audioonly' });
                 const dispatcher = connection.playStream(stream, { seek: 0, volume: 1 });
             })
             .catch(err =>

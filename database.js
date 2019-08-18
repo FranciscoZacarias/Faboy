@@ -6,7 +6,7 @@ mongoose.connect(process.env.DB,{ useNewUrlParser: true }, (err) =>
 {
 	if(err)
 	{
-		logger.log(`Error connecting to DB:\n${err}`, error);
+		logger.log(`Error connecting to DB:\n${err}`, 'error');
 	}
 });
 mongoose.connection.on('connected', () => 
