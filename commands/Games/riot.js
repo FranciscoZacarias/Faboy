@@ -14,6 +14,8 @@ module.exports = class extends Command
 
     async run(parsed_message)
     {
+        if(parsed_message.clean_message == "bans") 
+            return parsed_message.message.channel.send('```Akali - Yasuo - Zed - Morde - Garen - Illaoi - Darius```');
         //these are for future features
         const args = parsed_message.args;
         const props = Object.getOwnPropertyNames(this).slice(3);
