@@ -5,6 +5,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.aliases = ["torrent", "pb", "download"];
     }
 
     async run(parsed_message)
@@ -30,6 +31,8 @@ module.exports = class extends Command
             {
                 return parsed_message.message.channel.send("Can't find that torrent");
             }
+
+            console.log(obj);
 
             const desc_string = `Category: ${obj.Category} | Plataform: ${obj.Plataform} \nSeeders: ${obj.Seeders} | Leechers: ${obj.Leechers} \nSize: ${obj.Size} | Author Title: ${obj.Title}`
             const embed = new this.client.Discord.RichEmbed()

@@ -7,7 +7,7 @@ try:
 except:
 	keyword = "dumbfuck"
 
-image = Image.open('./assets/img/100meme.png')
+image = Image.open('./assets/img/100.png')
 font = ImageFont.truetype("impact.ttf", 70)
 draw = ImageDraw.Draw(image)
 

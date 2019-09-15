@@ -26,7 +26,6 @@ Faboy is a fully modular discord bot made for fun and learning.
 BOT_TOKEN=
 BOT_ID=
 BOT_PERFIX=
-BOT_DEV=
 DB= (mongoose database connection string)
 CAT_API_KEY=
 TENOR_API_KEY=
