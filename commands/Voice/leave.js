@@ -5,6 +5,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.aliases = ['stop', 'exit', 'gtfo', 'baza']
     }
 
     async run(parsed_message)

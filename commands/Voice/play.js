@@ -12,14 +12,18 @@ module.exports = class extends Command
     async run(parsed_message)
     {
         let message = parsed_message.message; 
+        let link = parsed_message.clean_message;
         if(message.member.voiceChannel && !message.guild.voiceConnection)
         {
             message.member.voiceChannel.join()
             .then(connection => 
             {
-                console.log(parsed_message.clean_message);
-                const stream = ytdl('https://www.youtube.com/watch?v=orVLq9IEr9Q', {filter: 'audioonly' });
+                const stream = ytdl(message.content.split(" ")[2], {filter: 'audioonly' });
                 const dispatcher = connection.playStream(stream, { seek: 0, volume: 1 });
+                dispatcher.on('end', () =>
+                {
+                    message.guild.voiceConnection.disconnect();
+                });
             })
             .catch(err =>
             {
