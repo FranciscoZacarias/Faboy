@@ -5,7 +5,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
-        this.aliases = ['?', 'commands', '911']
+        this.aliases = ['choose']
     }
 
     async run(parsed_message)

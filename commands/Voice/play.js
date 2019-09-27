@@ -19,7 +19,7 @@ module.exports = class extends Command
             .then(connection => 
             {
                 const stream = ytdl(message.content.split(" ")[2], {filter: 'audioonly' });
-                const dispatcher = connection.playStream(stream, { seek: 0, volume: 1 });
+                const dispatcher = connection.playStream(stream, { seek: 0, volume: 0.2 });
                 dispatcher.on('end', () =>
                 {
                     message.guild.voiceConnection.disconnect();
