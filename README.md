@@ -4,7 +4,7 @@ Faboy is a fully modular discord bot made for fun and learning.
 
 # Features!
 
-  - Yes, at least!
+  - Yes!
 
 # Objective
   
