@@ -16,8 +16,8 @@ Faboy is a fully modular discord bot made for fun and learning.
   - Make sure you have [Node.js](https://nodejs.org/en/) installed.
   - Run `npm install` to install dependencies.
   - Set up your .env file with the enviroment variables. 
-  - Some modules require [Python 3](https://www.python.org/downloads/) and some other dependencies. The script folder contains all python scripts used, but none are essential to run the bot. Feel free to not use if you so desire.
-  - Run `npm run dev` or execute `StartFaboy.bat`.
+  - Some modules require at least [Python 2.7](https://www.python.org/downloads/) and some other dependencies. The script folder contains all python scripts used, but none are essential to run the bot. Feel free to not use if you so desire.
+  - Run `npm run dev`.
   - Keep in mind **I have no idea what's happening** so good luck.
 
 # Environment Variables
