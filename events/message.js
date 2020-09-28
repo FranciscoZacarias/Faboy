@@ -1,13 +1,14 @@
 module.exports = async function(message)
 {
     const msg = message_parser(message);
+    
     if(msg.perfix != process.env.BOT_PERFIX) return;
     this.logger.log(`[${msg.discord_alias} in ${msg.guild_name}: ${msg.perfix} ${msg.command} ${msg.clean_message} ${msg.args}]`,'log');
     
     try
     {
         const command_run = this.commands.find(c => c.name === msg.command || c.aliases.includes(msg.command));
-        if(!command_run) return message.channel.send("wtf u sayin bro");
+        if(!command_run) return message.channel.send("Thou who do not possess the knowledge, shan't drink from my wisdom.");
         command_run.process(msg);
     }
     catch(error)

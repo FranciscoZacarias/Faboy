@@ -12,5 +12,4 @@ module.exports = class extends Command
     {
         return parsed_message.message.channel.send('pong!');
     }
-
 }

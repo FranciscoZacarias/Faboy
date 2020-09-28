@@ -27,7 +27,7 @@
     "ffmpeg": "0.0.4",
     "google-auth-library": "^5.10.1",
     "googleapis": "^44.0.0",
-    "jimp": "^0.6.8",
+    "jimp": "^0.16.1",
     "lol-champions": "^8.11.0",
     "moment": "^2.29.0",
     "mongoose": "^5.10.7",
