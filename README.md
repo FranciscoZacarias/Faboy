@@ -31,4 +31,8 @@ CAT_API_KEY=
 TENOR_API_KEY=
 EDAMAM_ID=
 EDAMAM_KEY=	
+
+# These are for a discord webhook that logs any error into your discord channel
+WEBHOOK_ID=
+WEBHOOK_TOKEN=
 ```
