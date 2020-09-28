@@ -4,6 +4,7 @@ module.exports = class extends Command
 {
     constructor(name, client, locale)
     {
+        this.description = "Pong!";
         super(name, client, locale);
     }
 

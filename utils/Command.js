@@ -5,6 +5,7 @@ module.exports = class Command
         this.name = name;
         this.client = client;
         this.locale = locale;
+        this.description = "Command";
         this.aliases = [];
     }
 

@@ -22,17 +22,17 @@
   "homepage": "https://github.com/FranciscoZacarias/Faboy#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "discord.js": "^11.6.2",
+    "discord.js": "^11.6.4",
     "dotenv": "^8.2.0",
     "ffmpeg": "0.0.4",
     "google-auth-library": "^5.10.1",
     "googleapis": "^44.0.0",
     "jimp": "^0.6.8",
     "lol-champions": "^8.11.0",
-    "moment": "^2.24.0",
-    "mongoose": "^5.9.5",
+    "moment": "^2.29.0",
+    "mongoose": "^5.10.7",
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.6",
-    "ytdl-core": "^0.29.7"
+    "weather-js": "^2.0.0"
   }
 }

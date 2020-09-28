@@ -6,6 +6,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.description = "Weather in given place";
     }
 
     async run(parsed_message)

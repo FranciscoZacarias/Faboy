@@ -2,7 +2,7 @@ module.exports = async function(message)
 {
     const msg = message_parser(message);
     if(msg.perfix != process.env.BOT_PERFIX) return;
-    this.logger.log(`[${this.chalk.bgBlueBright(msg.discord_alias)} in ${this.chalk.bgBlueBright(msg.guild_name)}: ${this.chalk.red(msg.perfix)} ${this.chalk.blueBright(msg.command)} ${this.chalk.greenBright(msg.clean_message)} ${this.chalk.magentaBright(msg.args)}]`,'log');
+    this.logger.log(`[${msg.discord_alias} in ${msg.guild_name}: ${msg.perfix} ${msg.command} ${msg.clean_message} ${msg.args}]`,'log');
     
     try
     {

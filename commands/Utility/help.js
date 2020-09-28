@@ -5,6 +5,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.description = "lmao";
         this.aliases = ['?', 'commands', '911']
     }
 
@@ -13,7 +14,7 @@ module.exports = class extends Command
         let command_str = "";
         this.client.commands.forEach(cmd => 
         {
-            command_str += cmd.name + '\n';
+            command_str += `**${cmd.name}**: ${cmd.description}` + '\n';
         });
         const embed = new this.client.Discord.RichEmbed()
             .setTitle('Helper')

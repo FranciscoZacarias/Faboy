@@ -7,8 +7,14 @@ try:
 except:
 	keyword = "dumbfuck"
 
+initialsize = 70
+kwdlen = len(keyword) - 5
+
+if(kwdlen > 0):
+	initialsize = initialsize - 5*kwdlen
+
 image = Image.open('./assets/img/100.png')
-font = ImageFont.truetype("impact.ttf", 70)
+font = ImageFont.truetype("VeraBI.ttf", initialsize)
 draw = ImageDraw.Draw(image)
 
 strip_width, strip_height = image.size

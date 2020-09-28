@@ -5,6 +5,7 @@ module.exports = class extends Command
     constructor(name, client, locale)
     {
         super(name, client, locale);
+        this.description = "My source code";
         this.aliases = ['src', 'code', 'git', 'github', 'js', 'rep', 'repo', 'repository']
     }
 
