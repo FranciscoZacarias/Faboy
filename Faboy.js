@@ -83,10 +83,11 @@ module.exports = class Faboy extends Client
      */
     async runImageDraw(parsed_message, image, textSizeBias, heightBias)
     {
-        const { spawn } = require('child_process');
-	
+        if(parsed_message.clean_message.length > 16) 
+            return parsed_message.message.channel.send("text too long boi"); 
+    
+        const { spawn } = require('child_process');            
         const script = spawn('python',['./scripts/imageDraw.py', parsed_message.clean_message, image, textSizeBias, heightBias]);
-        
         const chunks = [];
 
         script.stdout.on('data', (data) => { 
@@ -125,7 +126,7 @@ module.exports = class Faboy extends Client
         });
         script.stderr.on('data', (err) =>
         {
-            this.client.logger.log(err, 'error');
+            this.logger.log(err, 'error');
         });
     } 
 }
