@@ -16,7 +16,6 @@ module.exports = class Faboy extends Client
         this.moment = require('moment');
         this.ffmpeg = require('ffmpeg');
         this.jimp = require('jimp');
-        //this.database = require('./database.js');
         this.regionsLang = {
             'Portugal': 'pt-PT',
             'United States': 'en-EN'
