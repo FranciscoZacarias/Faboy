@@ -1,4 +1,5 @@
-module.exports = function (warn) 
-{
-    this.logger.log(warn, 'warn')
-}
+/** @format */
+
+module.exports = function (warn) {
+	this.logger.log(warn, "warn");
+};

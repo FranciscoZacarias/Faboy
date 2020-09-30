@@ -1,15 +1,14 @@
-const Command = require('../../utils/Command');
+/** @format */
 
-module.exports = class extends Command
-{
-    constructor(name, client, locale)
-    {
-        super(name, client, locale);
-        this.description = "Pong!";
-    }
+const Command = require("../../utils/Command");
 
-    async run(parsed_message)
-    {
-        return parsed_message.message.channel.send('pong!');
-    }
-}
+module.exports = class extends Command {
+	constructor(name, client, locale) {
+		super(name, client, locale);
+		this.description = "Pong!";
+	}
+
+	async run(parsed_message) {
+		return parsed_message.message.channel.send("pong!");
+	}
+};

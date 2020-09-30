@@ -1,18 +1,17 @@
-module.exports = class Command
-{
-    constructor(name, client, locale)
-    {
-        this.name = name;
-        this.client = client;
-        this.locale = locale;
-        this.description = "Command";
-        this.aliases = [];
-    }
+/** @format */
 
-    process(parsed_message)
-    {
-        return this.run(parsed_message);
-    }
+module.exports = class Command {
+	constructor(name, client, locale) {
+		this.name = name;
+		this.client = client;
+		this.locale = locale;
+		this.description = "Command";
+		this.aliases = [];
+	}
 
-    run() {};
-}
+	process(parsed_message) {
+		return this.run(parsed_message);
+	}
+
+	run() {}
+};

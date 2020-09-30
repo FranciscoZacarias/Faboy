@@ -5,22 +5,13 @@ const Command = require("../../utils/Command");
 module.exports = class extends Command {
 	constructor(name, client, locale) {
 		super(name, client, locale);
-		this.description = "My source code";
-		this.aliases = [
-			"src",
-			"code",
-			"git",
-			"github",
-			"js",
-			"rep",
-			"repo",
-			"repository",
-		];
+		this.description = "Yes or no";
+		this.aliases = ["yesno", "bool", "isittrue"];
 	}
 
 	async run(parsed_message) {
 		return parsed_message.message.channel.send(
-			"https://github.com/FranciscoZacarias/Faboy"
+			Math.random() < 0.5 ? "yes" : "no"
 		);
 	}
 };

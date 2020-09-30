@@ -1,23 +1,30 @@
-const Command = require('../../utils/Command');
+/** @format */
 
-module.exports = class extends Command
-{
-    constructor(name, client, locale)
-    {
-        super(name, client, locale);
-        this.description = "Inspiring quote";
-        this.aliases = ["motivation", "motivational", "phrase", "deep", "inspire", "inspirational", "inspiration"];
-    }
+const Command = require("../../utils/Command");
 
-    async run(parsed_message)
-    {
-        const url = "https://inspirobot.me/api?generate=true";
+module.exports = class extends Command {
+	constructor(name, client, locale) {
+		super(name, client, locale);
+		this.description = "Inspiring quote";
+		this.aliases = [
+			"motivation",
+			"motivational",
+			"phrase",
+			"deep",
+			"inspire",
+			"inspirational",
+			"inspiration",
+		];
+	}
 
-        this.client.fetch(url, { method: 'GET' })
-        .then(res => res.text())
-        .then(response =>
-        {
-            return parsed_message.message.channel.send(response);
-        });
-    }
-}
+	async run(parsed_message) {
+		const url = "https://inspirobot.me/api?generate=true";
+
+		this.client
+			.fetch(url, { method: "GET" })
+			.then((res) => res.text())
+			.then((response) => {
+				return parsed_message.message.channel.send(response);
+			});
+	}
+};

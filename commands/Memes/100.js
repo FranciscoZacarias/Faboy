@@ -1,16 +1,15 @@
-const Command = require('../../utils/Command');
+/** @format */
 
-module.exports = class extends Command
-{
-    constructor(name, client, locale)
-    {
-        super(name, client, locale);
-        this.description = "100 Skill meme";
-        this.aliases = ['skill'];
-    }
+const Command = require("../../utils/Command");
 
-    async run(parsed_message)
-    {
-        this.client.runImageDraw(parsed_message, '100', 6, 0.0);
-    } 
-}
+module.exports = class extends Command {
+	constructor(name, client, locale) {
+		super(name, client, locale);
+		this.description = "100 Skill meme";
+		this.aliases = ["skill"];
+	}
+
+	async run(parsed_message) {
+		this.client.runImageDraw(parsed_message, "100", 6, 0.0);
+	}
+};
