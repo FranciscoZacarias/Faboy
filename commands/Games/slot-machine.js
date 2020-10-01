@@ -26,7 +26,7 @@ module.exports = class extends Command {
 				} else {
 					if (stack[index - 1] != emoji) {
 						return parsed_message.message.react("💢");
-					} else if (index == 2) {
+					} else if (index == react_array.length - 1) {
 						return parsed_message.message.react("🏆");
 					}
 					stack.push(emoji);

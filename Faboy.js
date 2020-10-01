@@ -63,9 +63,16 @@ module.exports = class Faboy extends Client {
 	 * @param {dictinoary} parsed_message dictonary with filtered messaage content
 	 * @param {string} image image name (must be .png)
 	 * @param {int} textSizeBias bias for text size
-	 * @param {float} heightBias bias for text height
+	 * @param {float} heightBias bias for text height (1 default)
+	 * @param {float} widthBias bias for text width (1 default)
 	 */
-	async runImageDraw(parsed_message, image, textSizeBias, heightBias) {
+	async runImageDraw(
+		parsed_message,
+		image,
+		textSizeBias,
+		heightBias = 0.0,
+		widthBias = 0.0
+	) {
 		if (parsed_message.clean_message.length > 16)
 			return parsed_message.message.channel.send("text too long boi");
 
@@ -76,6 +83,7 @@ module.exports = class Faboy extends Client {
 			image,
 			textSizeBias,
 			heightBias,
+			widthBias,
 		]);
 		const chunks = [];
 

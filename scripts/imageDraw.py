@@ -16,12 +16,12 @@ if(kwdlen > 0):
     initialsize = initialsize - (int(sys.argv[3]))*kwdlen
 
 image = Image.open('./assets/img/' + sys.argv[2] + '.png')
-font = ImageFont.truetype("VeraBI.ttf", initialsize)
+font = ImageFont.truetype("impact-mt.ttf", initialsize)
 draw = ImageDraw.Draw(image)
 
 strip_width, strip_height = image.size
 text_width, text_height = draw.textsize(keyword, font)
-position = ((strip_width-text_width)/4,
+position = ((strip_width-text_width)/(4 - float(sys.argv[5])),
             (strip_height-text_height)/(2 - float(sys.argv[4])))
 
 draw.text(xy=position, text=keyword, font=font)

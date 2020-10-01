@@ -33,6 +33,7 @@
     "mongoose": "^5.10.7",
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.6",
+    "unirest": "^0.6.0",
     "weather-js": "^2.0.0"
   }
 }

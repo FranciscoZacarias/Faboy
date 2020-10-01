@@ -5,15 +5,15 @@ const Command = require("../../utils/Command");
 module.exports = class extends Command {
 	constructor(name, client, locale) {
 		super(name, client, locale);
-		this.description = "My source code";
+		this.description = "Bot Information";
 		this.aliases = [
 			"src",
 			"code",
 			"git",
 			"github",
 			"js",
-			"rep",
-			"repo",
+			"info",
+			"source",
 			"repository",
 		];
 	}

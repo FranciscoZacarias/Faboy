@@ -10,6 +10,6 @@ module.exports = class extends Command {
 	}
 
 	async run(parsed_message) {
-		this.client.runImageDraw(parsed_message, "stonks", 3, 0.7);
+		this.client.runImageDraw(parsed_message, "stonks", 3, 0.8, 2);
 	}
 };
