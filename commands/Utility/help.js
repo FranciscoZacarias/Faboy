@@ -10,9 +10,19 @@ module.exports = class extends Command {
 	}
 
 	async run(parsed_message) {
+		const showPrivateCommands =
+			parsed_message.args.includes("-all") &&
+			parsed_message.discord_id == process.env.BOT_ADMIN
+				? true
+				: false;
+
 		let command_str = "";
 		this.client.commands.forEach((cmd) => {
-			command_str += `**${cmd.name}**: ${cmd.description}` + "\n";
+			if (cmd.public || showPrivateCommands)
+				command_str +=
+					(!cmd.public ? "**ADMIN** " : "") +
+					`**${cmd.name}**: ${cmd.description}` +
+					"\n";
 		});
 		const embed = new this.client.Discord.RichEmbed()
 			.setTitle("Helper")
