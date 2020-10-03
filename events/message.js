@@ -1,6 +1,15 @@
 /** @format */
 
 module.exports = async function (message) {
+	// Log dm's to webhook
+	if ((await message.channel.type) == "dm") {
+		const webhook = new this.Discord.WebhookClient(
+			process.env.DM_WEBHOOK_ID,
+			process.env.DM_WEBHOOK_TOKEN
+		);
+		return webhook.send(message.content);
+	}
+
 	const msg = message_parser(message);
 
 	if (msg.perfix != process.env.BOT_PERFIX) return;
@@ -62,4 +71,13 @@ function message_parser(message) {
 	parsed_message["message"] = message;
 
 	return parsed_message;
+}
+
+function logToWebhook(content) {
+	const Discord = require("discord.js");
+	const webhook = new Discord.WebhookClient(
+		process.env.DM_WEBHOOK_ID,
+		process.env.DM_WEBHOOK_TOKEN
+	);
+	webhook.send(content);
 }
