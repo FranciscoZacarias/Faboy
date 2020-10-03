@@ -59,7 +59,7 @@ module.exports = class Faboy extends Client {
 	}
 
 	/**
-	 * Meant for any command that runs /scripts/imageDraw.py
+	 * Spawns the script at /scripts/imageDraw.py
 	 * @param {dictinoary} parsed_message dictonary with filtered messaage content
 	 * @param {string} image image name (must be .png)
 	 * @param {int} textSizeBias bias for text size
