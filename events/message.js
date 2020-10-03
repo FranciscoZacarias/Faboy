@@ -1,13 +1,31 @@
 /** @format */
 
+// yes this is a big function and does 3 or 4 things that i could separate into 3 or 4 functions
+// but tell me, is that really worth it? Life is about two simple things:
+// Taking risks and writing bad code, and i don't ever take risks!
 module.exports = async function (message) {
 	// Log dm's to webhook
 	if ((await message.channel.type) == "dm") {
+		if (message.author.bot == true) return;
 		const webhook = new this.Discord.WebhookClient(
 			process.env.DM_WEBHOOK_ID,
 			process.env.DM_WEBHOOK_TOKEN
 		);
-		return webhook.send(message.content);
+
+		const embed = new this.Discord.RichEmbed()
+			.setTitle("Direct Message")
+			.setDescription(`DM from <@${message.author.id}>`)
+			.setThumbnail(
+				`https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}`
+			)
+			.addField("Content:", message.content)
+			.addField(
+				`Message Author: ${message.author.username}#${message.author.discriminator}`,
+				`ID:${message.author.id}\nTYPE:${message.type}`
+			)
+			.setTimestamp();
+
+		return webhook.send(embed);
 	}
 
 	const msg = message_parser(message);
