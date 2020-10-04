@@ -9,10 +9,9 @@ module.exports = class extends Command {
 		this.description = "Sends dm to user by ID";
 	}
 
-	//TODO: check if user id is valid and confirm message sent
 	async run(parsed_message) {
-		return this.client.users
-			.get(parsed_message.args[0].substring(1))
-			.send(parsed_message.clean_message);
+		let user = this.client.users.get(parsed_message.args[0].substring(1));
+		if (!user) return parsed_message.message.channel.send("Bad user ID");
+		return user.send(parsed_message.clean_message);
 	}
 };
