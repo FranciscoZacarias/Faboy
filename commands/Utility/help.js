@@ -11,7 +11,7 @@ module.exports = class extends Command {
 
 	async run(parsed_message) {
 		const showPrivateCommands =
-			parsed_message.args.includes("-all") &&
+			parsed_message.args.includes("-admin") &&
 			parsed_message.discord_id == process.env.BOT_ADMIN
 				? true
 				: false;

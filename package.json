@@ -33,6 +33,8 @@
     "mongoose": "^5.10.7",
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.6",
+    "swearjar": "^0.2.0",
+    "twitter": "^1.7.1",
     "unirest": "^0.6.0",
     "weather-js": "^2.0.0"
   }

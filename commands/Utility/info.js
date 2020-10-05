@@ -36,13 +36,15 @@ module.exports = class extends Command {
 				"Most useful commands:",
 				"-slot-machine: Faboy is very open about his gambling addiction. Despite this, he still openly promotes it as a trust building exercise with god.\
 				\n-stonks: Faboy enjoyes the occasional meme\
-				\n-Pick: Faboy's strong will allows him to make the hardest choices"
+				\n-Pick: Faboy's strong will allows him to make the hardest choices\
+				\n-tweet: You can literaly tweet something on my behalf. Your power is limitless"
 			)
 			.addField(
 				"Hobbies:",
 				"-Mining the bitcoin\n-Eating mcdonalds from non requested uber deliveries at 2am. Always overtips the driver\n-Delivering the machine"
 			)
 			.addField("Get Started:", "Try 'faboy help'!")
+			.addField("Follow me on Twitter!", "https://twitter.com/faboy14438099")
 			.addField("Source code: ", "https://github.com/FranciscoZacarias/Faboy")
 			.setTimestamp()
 			.setFooter(
