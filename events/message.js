@@ -46,7 +46,7 @@ module.exports = async function (message) {
 			);
 		command_run.process(msg);
 	} catch (error) {
-		this.logger.log(`${error}`, "error");
+		this.client.logger.log(`${error}`, "error");
 	}
 };
 

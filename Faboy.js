@@ -2,6 +2,7 @@
 
 const { Client, Collection } = require("discord.js");
 const { readdirSync, statSync, readFile } = require("fs");
+var Twitter = require("twitter");
 
 module.exports = class Faboy extends Client {
 	constructor(options = {}) {
@@ -20,6 +21,12 @@ module.exports = class Faboy extends Client {
 			Portugal: "pt-PT",
 			"United States": "en-EN",
 		};
+		this.twitterClient = new Twitter({
+			consumer_key: process.env.TWITTER_CONSUMER_KEY,
+			consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+			access_token_key: process.env.TWITTER_ACCESS_TOKEN,
+			access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+		});
 		this.initializeEvents("./events");
 		this.initializeCommands("./commands");
 	}
