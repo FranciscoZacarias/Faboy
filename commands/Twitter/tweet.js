@@ -11,7 +11,9 @@ module.exports = class extends Command {
 	}
 
 	async run(parsed_message) {
-		let message = swearjar.censor(parsed_message.clean_message);
+		let message = swearjar
+			.censor(parsed_message.clean_message)
+			.substring(0, 239);
 
 		this.client.twitterClient.post(
 			"statuses/update",
@@ -20,7 +22,6 @@ module.exports = class extends Command {
 			},
 			function (error, tweet, response) {
 				if (!error) {
-					console.log(tweet);
 					parsed_message.message.react("✅");
 					return parsed_message.message.channel.send(
 						`https://twitter.com/faboy14438099/status/${tweet.id_str}`

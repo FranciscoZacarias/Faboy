@@ -31,6 +31,7 @@
     "lol-champions": "^8.11.0",
     "moment": "^2.29.0",
     "mongoose": "^5.10.7",
+    "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
     "opusscript": "0.0.6",
     "swearjar": "^0.2.0",

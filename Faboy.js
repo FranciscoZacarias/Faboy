@@ -8,9 +8,11 @@ module.exports = class Faboy extends Client {
 	constructor(options = {}) {
 		super(options);
 		this.fs = require("fs");
+		this.cron = require("node-cron");
 		this.logger = require("./utils/Logger");
 		this.chalk = require("chalk");
 		this.commands = new Collection();
+		this.modules = new Collection();
 		this.acceptCommands = true;
 		this.Discord = require("discord.js");
 		this.fetch = require("node-fetch");
@@ -29,8 +31,14 @@ module.exports = class Faboy extends Client {
 		});
 		this.initializeEvents("./events");
 		this.initializeCommands("./commands");
+		this.initializeModules("./utils/modules");
+		this.initializeJobs("./jobs");
 	}
 
+	/**
+	 * Initializes all commands
+	 * @param {string} path path to commands folder
+	 */
 	initializeCommands(path) {
 		readdirSync(path).forEach((file) => {
 			try {
@@ -49,6 +57,10 @@ module.exports = class Faboy extends Client {
 		});
 	}
 
+	/**
+	 * Initializes all Discord events
+	 * @param {string} path path to discord events folder
+	 */
 	initializeEvents(path) {
 		readdirSync(path).forEach((file) => {
 			try {
@@ -66,66 +78,45 @@ module.exports = class Faboy extends Client {
 	}
 
 	/**
-	 * Spawns the script at /scripts/imageDraw.py
-	 * @param {dictinoary} parsed_message dictonary with filtered messaage content
-	 * @param {string} image image name (must be .png)
-	 * @param {int} textSizeBias bias for text size
-	 * @param {float} heightBias bias for text height (1 default)
-	 * @param {float} widthBias bias for text width (1 default)
+	 * Initializes all modules
+	 * @param {string} path path do modules
 	 */
-	async runImageDraw(
-		parsed_message,
-		image,
-		textSizeBias,
-		heightBias = 0.0,
-		widthBias = 0.0
-	) {
-		if (parsed_message.clean_message.length > 16)
-			return parsed_message.message.channel.send("text too long boi");
-
-		const { spawn } = require("child_process");
-		const script = spawn("python", [
-			"./scripts/imageDraw.py",
-			parsed_message.clean_message,
-			image,
-			textSizeBias,
-			heightBias,
-			widthBias,
-		]);
-		const chunks = [];
-
-		script.stdout.on("data", (data) => {
-			chunks.push(data);
+	initializeModules(path) {
+		readdirSync(path).forEach((file) => {
+			try {
+				let file_path = path + "/" + file;
+				if (file.endsWith("js")) {
+					let Listener = require(file_path);
+					this.modules.set(file.replace(/.js/g, ""), Listener);
+				} else if (statSync(file_path).isDirectory()) {
+					this.initializeEvents(file_path);
+				}
+			} catch (error) {
+				this.logger.log(error, "error");
+			}
 		});
-		script.stdout.on("end", () => {
-			let output_buf = Buffer.concat(chunks);
-			let base64_str = JSON.parse(output_buf.toString()).picture;
+	}
 
-			let data = new URLSearchParams();
-			data.append("request", base64_str);
-			this.fetch("https://www.base64decode.net/base64-image-decoder", {
-				method: "POST",
-				body: data,
-			})
-				.then((res) => res.text())
-				.then((text) => {
-					let html = JSON.stringify(text);
-					let tag = "<img src=\\";
-					let first_char = html.indexOf(tag) + tag.length + 1;
-					let uri = "";
-					let req = false;
-					while (!req) {
-						if (html[first_char] == "\\") {
-							req = true;
-							break;
-						}
-						uri += html[first_char++];
-					}
-					return parsed_message.message.channel.send(uri);
-				});
+	/**
+	 * Initializes all job schedules
+	 * @param {string} path path to folder with jobs to schedule
+	 */
+	initializeJobs(path) {
+		readdirSync(path).forEach((file) => {
+			try {
+				let file_path = path + "/" + file;
+				if (file.endsWith("js")) {
+					require(file_path)();
+				} else if (statSync(file_path).isDirectory()) {
+					this.initializeJobs(file_path);
+				}
+			} catch (error) {
+				this.logger.log(error, "error");
+			}
 		});
-		script.stderr.on("data", (err) => {
-			this.logger.log(err, "error");
-		});
+	}
+
+	getModule(moduleName) {
+		return this.modules.find((m) => m.name === moduleName);
 	}
 };
