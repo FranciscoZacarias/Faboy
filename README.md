@@ -14,7 +14,7 @@ To add events, create a ```.js``` file in the [events](events) folder and make s
 
 To schedule jobs, I am using [Node-Cron](https://www.npmjs.com/package/node-cron).
 
-Jobs are functions that will run every X units of time (Seconds, Minutes, Hours...). Create a ```.js``` file that exports a functions that calls the cron.schedule method. See [jobs/job.example](job.example) for a sample function.
+Jobs are functions that will run every X units of time (Seconds, Minutes, Hours...). Create a ```.js``` file that exports a functions that calls the cron.schedule method. See [job.example](jobs/job.example) for a sample function.
 
 # Environment Variables
 
