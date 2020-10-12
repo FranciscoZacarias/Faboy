@@ -4,7 +4,7 @@ Faboy is a fully modular discord bot made for fun and learning, hosted on a rasp
 
 # Commands
 
-To add commands, create a ```.js``` file in the  [commands](commands) folder and export a class that extends [utils/Command.js](Command) and implement the run method. See [commands/command.example](command.example) for a sample command class.
+To add commands, create a ```.js``` file in the  [commands](commands) folder and export a class that extends [Command](utils/Command.js) and implement the run method. See [command.example](commands/command.example) for a sample command class.
 
 # Events
 
