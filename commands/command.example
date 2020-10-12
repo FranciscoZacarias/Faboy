@@ -1,0 +1,21 @@
+/** @format */
+
+const Command = require("../../utils/Command");
+
+module.exports = class extends Command {
+	constructor(name, client, locale) {
+		super(name, client, locale);
+		this.description = "Pong!"; // Description that will show up in the 'help' Command
+        this.aliases = []; // String list with alternative command names
+        this.public = true; // true by default. If false, only admin can run this command
+	}
+
+
+	async run(parsed_message) {
+		
+        /**
+            Command ...
+        **/
+        
+	}
+};

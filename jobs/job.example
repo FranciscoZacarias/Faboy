@@ -1,0 +1,12 @@
+/** @format */
+
+var request = require("request");
+var cron = require("node-cron");
+
+module.exports = function (client) {
+	cron.schedule("* * * * *", function () {
+        /**
+            Job...
+        **/
+    });
+};
