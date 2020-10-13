@@ -4,7 +4,7 @@ var request = require("request");
 var cron = require("node-cron");
 
 module.exports = function (client) {
-	cron.schedule("0 0 */2 * * *", function () {
+	cron.schedule("0 0 */8 * * *", function () {
 		var joke;
 		var options = {
 			method: "GET",
@@ -18,7 +18,7 @@ module.exports = function (client) {
 
 		request(options, function (error, response, body) {
 			if (error) throw new Error(error);
-			joke = JSON.parse(body).content;
+			joke = "[Dad Joke]:" + JSON.parse(body).content;
 			let module_run = client.getModule("tweetStatus");
 			module_run(client, joke, (error, tweet, response) => {
 				if (!error) client.logger.log("tweet sent!", "log");
