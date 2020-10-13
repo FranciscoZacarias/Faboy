@@ -35,7 +35,7 @@ module.exports = class extends Command {
 			.addField(
 				"Most useful commands:",
 				"-slot-machine: Faboy is very open about his gambling addiction. Despite this, he still openly promotes it as a trust building exercise with god.\
-				\n-stonks: Faboy enjoyes the occasional meme\
+				\n-stonks: Faboy enjoys the occasional meme\
 				\n-Pick: Faboy's strong will allows him to make the hardest choices\
 				\n-tweet: You can literaly tweet something on my behalf. Your power is limitless"
 			)
