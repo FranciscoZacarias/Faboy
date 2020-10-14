@@ -1,6 +1,6 @@
 /** @format */
 
-var job = require("../utils/Job");
+var Job = require("../utils/Job");
 
 module.exports = class extends Job {
 	constructor(name, client) {
