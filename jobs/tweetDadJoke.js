@@ -18,7 +18,7 @@ module.exports = function (client) {
 
 		request(options, function (error, response, body) {
 			if (error) throw new Error(error);
-			joke = "[Dad Joke]:" + JSON.parse(body).content;
+			joke = "[Dad Joke]: " + JSON.parse(body).content;
 			let module_run = client.getModule("tweetStatus");
 			module_run(client, joke, (error, tweet, response) => {
 				if (!error) client.logger.log("tweet sent!", "log");

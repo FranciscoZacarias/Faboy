@@ -106,7 +106,11 @@ module.exports = class Faboy extends Client {
 			try {
 				let file_path = path + "/" + file;
 				if (file.endsWith("js")) {
-					require(file_path)(this);
+					//require(file_path)(this);
+					const Job = require(file_path);
+					const job_name = file.replace(/.js/g, "").toLowerCase();
+					const job_instance = new Job(job_name, this);
+					job_instance.run();
 				} else if (statSync(file_path).isDirectory()) {
 					this.initializeJobs(file_path);
 				}

@@ -3,8 +3,16 @@
 var request = require("request");
 var cron = require("node-cron");
 
-module.exports = function (client) {
-	cron.schedule("0 0 */4 * * *", function () {
+module.exports = class extends Job {
+	constructor(name, client) {
+		super(name, client);
+		this.description = "Number Fact";
+	}
+};
+
+/*
+function (client) {
+	cron.schedule("0 0 * * * *", function () {
 		var fact;
 		const options = {
 			method: "GET",
@@ -21,7 +29,7 @@ module.exports = function (client) {
 			if (error) throw new Error(error);
 
 			let jsonres = JSON.parse(body);
-			fact = `[Daily Number Fact] ${jsonres.number}:` + jsonres.text;
+			fact = `[Daily Number Fact] ${jsonres.number}: ` + jsonres.text;
 			let module_run = client.getModule("tweetStatus");
 
 			module_run(client, fact, (error, tweet, response) => {
@@ -31,3 +39,4 @@ module.exports = function (client) {
 		});
 	});
 };
+*/
