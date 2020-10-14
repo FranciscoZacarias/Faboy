@@ -5,11 +5,20 @@ module.exports = class Job {
 		this.name = name;
 		this.client = client;
 		this.description = "Job";
+		this.schedule = "0 0 * * * *";
 		this.cron = require("node-cron");
 		this.request = require("request");
 	}
 
-	job(schedule) {}
+	job() {}
 
-	run() {}
+	createTweet(content) {
+		return `[${this.description}]: ${content}`;
+	}
+
+	run() {
+		cron.schedule(schedule, function () {
+			this.job();
+		});
+	}
 };

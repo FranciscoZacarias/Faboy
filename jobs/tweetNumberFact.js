@@ -7,13 +7,10 @@ module.exports = class extends Job {
 	constructor(name, client) {
 		super(name, client);
 		this.description = "Number Fact";
+		this.schedule = "0 0 */4 * * *";
 	}
-};
 
-/*
-function (client) {
-	cron.schedule("0 0 * * * *", function () {
-		var fact;
+	job() {
 		const options = {
 			method: "GET",
 			url: "https://rapidapi.p.rapidapi.com/random/trivia",
@@ -29,7 +26,7 @@ function (client) {
 			if (error) throw new Error(error);
 
 			let jsonres = JSON.parse(body);
-			fact = `[Daily Number Fact] ${jsonres.number}: ` + jsonres.text;
+			let fact = this.createTweet(`${jsonres.number} - ${jsonres.text}`);
 			let module_run = client.getModule("tweetStatus");
 
 			module_run(client, fact, (error, tweet, response) => {
@@ -37,6 +34,5 @@ function (client) {
 				else client.logger.log("tweet not sent!", "error");
 			});
 		});
-	});
+	}
 };
-*/
