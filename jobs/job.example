@@ -3,10 +3,16 @@
 var request = require("request");
 var cron = require("node-cron");
 
-module.exports = function (client) {
-	cron.schedule("* * * * *", function () {
-        /**
+module.exports  = class extends Job {
+	constructor(name, client) {
+		super(name, client);
+		this.description = "Job Description";
+		this.schedule = "0 0 * * * *";
+	}
+
+	job() {
+        /*
             Job...
-        **/
-    });
+        */
+	}
 };
