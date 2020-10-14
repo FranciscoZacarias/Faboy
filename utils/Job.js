@@ -8,11 +8,10 @@ module.exports = class Job {
 		this.schedule = "0 0 * * * *";
 		this.cron = require("node-cron");
 		this.request = require("request");
-		this.self = this;
 	}
 
 	job() {
-		console.log("function not overriden");
+		console.log("method not overridden");
 	}
 
 	createTweet(content) {
@@ -20,7 +19,7 @@ module.exports = class Job {
 	}
 
 	run() {
-		var method = this.self.job;
+		var method = this.job;
 		this.cron.schedule(this.schedule, function () {
 			method();
 		});
