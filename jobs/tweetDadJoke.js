@@ -1,7 +1,6 @@
 /** @format */
 
-var request = require("request");
-var cron = require("node-cron");
+var job = require("../utils/Job");
 
 module.exports = class extends Job {
 	constructor(name, client) {
@@ -21,7 +20,7 @@ module.exports = class extends Job {
 			},
 		};
 
-		request(options, function (error, response, body) {
+		this.request(options, function (error, response, body) {
 			if (error) throw new Error(error);
 
 			let joke = this.createTweet(`${JSON.parse(body).content}`);

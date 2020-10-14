@@ -17,7 +17,7 @@ module.exports = class Job {
 	}
 
 	run() {
-		cron.schedule(schedule, function () {
+		this.cron.schedule(schedule, function () {
 			this.job();
 		});
 	}
