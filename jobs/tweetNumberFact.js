@@ -9,7 +9,9 @@ module.exports = class extends Job {
 		this.schedule = "0 0 */4 * * *";
 	}
 
-	job() {
+	job(self) {
+		const client = self.client;
+
 		const options = {
 			method: "GET",
 			url: "https://rapidapi.p.rapidapi.com/random/trivia",
@@ -21,7 +23,7 @@ module.exports = class extends Job {
 			},
 		};
 
-		this.request(options, function (error, response, body) {
+		self.request(options, function (error, response, body) {
 			if (error) throw new Error(error);
 
 			let jsonres = JSON.parse(body);

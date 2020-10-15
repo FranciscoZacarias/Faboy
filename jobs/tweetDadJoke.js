@@ -9,7 +9,9 @@ module.exports = class extends Job {
 		this.schedule = "0 0 */6 * * *";
 	}
 
-	job() {
+	job(self) {
+		const client = self.client;
+
 		const options = {
 			method: "GET",
 			url: "https://joke3.p.rapidapi.com/v1/joke",
@@ -20,10 +22,10 @@ module.exports = class extends Job {
 			},
 		};
 
-		this.request(options, function (error, response, body) {
+		self.request(options, function (error, response, body) {
 			if (error) throw new Error(error);
 
-			let joke = this.createTweet(`${JSON.parse(body).content}`);
+			let joke = self.createTweet(`${JSON.parse(body).content}`);
 			let module_run = client.getModule("tweetStatus");
 
 			module_run(client, joke, (error, tweet, response) => {

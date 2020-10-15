@@ -10,7 +10,7 @@ module.exports = class Job {
 		this.request = require("request");
 	}
 
-	job() {
+	job(self) {
 		console.log("method not overridden");
 	}
 
@@ -19,9 +19,9 @@ module.exports = class Job {
 	}
 
 	run() {
-		var method = this.job;
+		var self = this;
 		this.cron.schedule(this.schedule, function () {
-			method();
+			self.job(self);
 		});
 	}
 };

@@ -9,7 +9,8 @@ module.exports  = class extends Job {
 		this.schedule = "0 0 * * * *";
 	}
 
-	job() {
+	job(self) {
+		const client = self.client; 
         /*
             Job...
         */
