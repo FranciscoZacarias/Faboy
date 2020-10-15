@@ -27,7 +27,7 @@ module.exports = class extends Job {
 			if (error) throw new Error(error);
 
 			let jsonres = JSON.parse(body);
-			let fact = this.createTweet(`${jsonres.number} - ${jsonres.text}`);
+			let fact = self.createTweet(`${jsonres.number} - ${jsonres.text}`);
 			let module_run = client.getModule("tweetStatus");
 
 			module_run(client, fact, (error, tweet, response) => {
