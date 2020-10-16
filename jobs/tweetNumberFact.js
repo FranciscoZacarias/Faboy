@@ -30,10 +30,7 @@ module.exports = class extends Job {
 			let fact = self.createTweet(`${jsonres.number} - ${jsonres.text}`);
 			let module_run = client.getModule("tweetStatus");
 
-			module_run(client, fact, (error, tweet, response) => {
-				if (!error) client.logger.log("tweet sent!", "log");
-				else client.logger.log("tweet not sent!", "error");
-			});
+			module_run(client, fact, (error, tweet, response) => {});
 		});
 	}
 };

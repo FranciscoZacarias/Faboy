@@ -7,6 +7,8 @@ module.exports = function tweetStatus(client, content, callback) {
 			status: content,
 		},
 		function (error, tweet, response) {
+			if (!error) client.logger.log("tweet sent!", "log");
+			else client.logger.log("tweet not sent!  " + error, "error");
 			callback(error, tweet, response);
 		}
 	);
