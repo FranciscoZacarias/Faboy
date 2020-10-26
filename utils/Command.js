@@ -11,7 +11,7 @@ module.exports = class Command {
 	}
 
 	process(parsed_message) {
-		if ((!this.public && process.env.BOT_ADMIN) || this.public)
+		if (parsed_message.discord_id == process.env.BOT_ADMIN || this.public)
 			return this.run(parsed_message);
 	}
 
