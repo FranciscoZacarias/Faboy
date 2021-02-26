@@ -10,6 +10,7 @@ module.exports = class extends Command {
 	}
 
 	async run(parsed_message) {
+		let arr = parsed_message.clean_message.split(",");
 		return parsed_message.message.channel.send(
 			arr[Math.floor(Math.random() * arr.length)]
 		);
