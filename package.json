@@ -29,7 +29,7 @@
     "googleapis": "^60.0.1",
     "jimp": "^0.16.1",
     "lol-champions": "^8.11.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "mongoose": "^5.11.18",
     "node-cron": "^2.0.3",
     "node-fetch": "^2.6.1",
